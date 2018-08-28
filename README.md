@@ -7,4 +7,4 @@ The data we use comes from a local partner hospital. include 84 lbl and 73 yz.Ea
 
 |mean accuracy|mean precision|mean recall|mean F1_score|
 |:--:|:--:|:--:|:--:|
-|0.780|0.752|0.886|0.812|
+|0.780|0.756|0.900|0.817|
