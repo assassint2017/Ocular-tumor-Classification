@@ -20,7 +20,7 @@ class DenseNet(nn.Module):
     这个版本的网络是原文中表现最好的DenseNet-BC结构，也就是通过过渡层和bottleneck结构进行降维的设计
     原始论文中所有卷积层的通道数量都是受到增加率的影响的
 
-    共203698可训练的参数,接近20W左右
+    共202066可训练的参数,接近20W左右
     """
     def __init__(self, block_nums, growth_rate):
         """
@@ -152,3 +152,23 @@ class Transition_layer(nn.Module):  # 每两个block中间的过度层,过度层
 
     def forward(self, inputs):
         return self.pool(self.relu(self.conv(inputs)))
+
+# # 计算网络参数数量
+# num_parameter = .0
+# net = DenseNet([3, 3, 4, 4], 16)
+# for item in net.modules():
+# 
+#     if isinstance(item, nn.Conv2d):
+#         num_parameter += (item.weight.size(0) * item.weight.size(1) * item.weight.size(2) * item.weight.size(3))
+# 
+#         if item.bias is not None:
+#             num_parameter += item.bias.size(0)
+# 
+#     elif isinstance(item, nn.PReLU):
+#         num_parameter += item.num_parameters
+# 
+#     elif isinstance(item, nn.BatchNorm2d):
+#         num_parameter += item.num_features
+# 
+# 
+# print(num_parameter)
