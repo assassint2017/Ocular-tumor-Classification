@@ -16,7 +16,7 @@ from dataset.dataset import Dataset
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
 # Hyper parameters
-epoch_num = 601
+epoch_num = 401
 batch_size = 32
 lr = 1e-4  # learning rate
 weight_decay = 1e-5
@@ -43,7 +43,7 @@ for fold_index in range(5):
 
     # define network
     # net = VGG().cuda()
-    net = DenseNet([3, 3, 4, 4], 16).cuda()
+    net = DenseNet([3, 3, 4, 4], 8).cuda()
     net = nn.DataParallel(net)
 
     # define optimizer
@@ -138,7 +138,7 @@ for fold_index in range(5):
             net.train()
 
     # 在每一折训练结束后计算评价指标,这里约定把lbl称为正样本
-    net = torch.nn.DataParallel(DenseNet([3, 3, 4, 4], 16)).cuda()
+    net = torch.nn.DataParallel(DenseNet([3, 3, 4, 4], 8)).cuda()
     net.load_state_dict(torch.load('./module/net-fold' + str(fold_index) + '.pth'))
     net.eval()
 
